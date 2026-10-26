@@ -1,0 +1,12 @@
+{
+  "name": "cognitived-case-study",
+  "private": true,
+  "type": "module",
+  "description": "Engineering case study of CognitivED with small, tested models of its core patterns.",
+  "scripts": {
+    "test": "node --test \"patterns/*.test.js\""
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
