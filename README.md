@@ -1,5 +1,7 @@
 # CognitivED: engineering case study
 
+[![tests](https://github.com/samir-husain/cognitived/actions/workflows/test.yml/badge.svg)](https://github.com/samir-husain/cognitived/actions/workflows/test.yml)
+
 **An AI-assisted e-learning platform: DRM-protected video lessons, assessments, analytics dashboards, an AI tutor that talks back, and online payments, built on a React SPA, a React admin panel and about 23 Node.js microservices.**
 
 Live product: [cognitive-edu.com](https://cognitive-edu.com) · My role: Senior Software Engineer at IINVSYS, owner of the student web app and the admin panel, with backend support across the services.
@@ -90,10 +92,23 @@ Rollback-safe nginx tuning (gzip, caching, HTTP/2, security headers) and a Conte
 
 React 18, Vite, React Router 7, Redux, Formik + Yup, Shaka Player (Widevine, FairPlay), three.js, KaTeX, SSE and WebSocket clients, Jest, Testing Library, Playwright, axe, Node.js microservices, MongoDB, nginx, Razorpay, Stripe, PayPal. Version control on the product is SVN with a scripted commit gate.
 
+## How I work
+
+The short version: go deeper until the thing is right, then prove it.
+
+- **Measure, change, re-measure.** Every number in [`docs/quality-scorecard.md`](docs/quality-scorecard.md) comes from a tool, with a before and an after: tests 458 → ~1,560, coverage 46% → 76%, axe 37 → 0, admin bundle 869 → 125 kB.
+- **Pure logic, tested alone.** Anything that decides what a screen shows is a pure function with tests next to it. The [`patterns/`](patterns/) folder holds small, dependency-free models of three of them (cross-tab lock, failure classification and replay rule, streaming turn lifecycle), with 14 `node --test` cases run by CI on every push.
+- **Verify live, then write it down.** A change is done when it has been exercised in a real browser against staging and the note says what was and was not verified. The dated [`docs/engineering-journal.md`](docs/engineering-journal.md) is that log for Sep to Oct 2026.
+- **Rollback-safe operations.** nginx and CSP changes ship with a backup and an automatic restore if the config test fails; CSP went Report-Only first and was enforced only after the full e2e suite ran clean.
+- **Decisions are recorded, not just fixes.** "Kept on purpose" items, refused suggestions and known gaps are written down with the reason, so the next person does not re-litigate them.
+
 ## In this repository
 
 - `demos/` : three interactive browser models (checkout that cannot double-charge, graceful failure per service, streaming AI answers that cancel). Open them at <https://samir-husain.github.io/cognitived/demos/>.
+- `patterns/` : the same three ideas as tested JavaScript modules (`npm test`).
 - `docs/architecture.md` : the student web app's structure, the API availability contract and the payment flow in more detail.
+- `docs/engineering-journal.md` : dated log of the work, with the numbers at each step.
+- `docs/quality-scorecard.md` : before/after table and how each number was measured.
 
 ---
 
