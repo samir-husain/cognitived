@@ -1,0 +1,244 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CognitivED patterns: live demos</title>
+<style>
+:root{--bg:#0b0d14;--bg2:#10131d;--card:#141826;--text:#eef0f8;--muted:#98a0b8;--line:#232840;--accent:#7c9cff;--accent2:#4de0b8;--bad:#ff6b7a;--warn:#ffc857;--ok:#4de0b8}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:5;background:rgba(11,13,20,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+nav b{letter-spacing:.02em}
+nav div a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:.92rem}
+nav div a:hover{color:var(--text)}
+@media(max-width:640px){nav div a.hide{display:none}}
+.hero{padding:84px 0 56px;background:radial-gradient(900px 420px at 80% -10%,rgba(124,156,255,.18),transparent),radial-gradient(700px 380px at 0% 0%,rgba(77,224,184,.12),transparent)}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.9rem;color:var(--accent2);background:rgba(77,224,184,.07)}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(77,224,184,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(77,224,184,0)}100%{box-shadow:0 0 0 0 rgba(77,224,184,0)}}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.1;margin:18px 0 14px;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.15rem;max-width:660px}
+.btns{margin:26px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;background:var(--card);cursor:pointer;font-size:1rem}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b0d14}
+.btn:hover{filter:brightness(1.1)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:44px}
+.metric{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px 18px}
+.metric b{font-size:1.7rem;display:block}
+.metric small{color:var(--muted)}
+section{padding:64px 0}
+section.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+h2{font-size:1.9rem;margin:0 0 8px;letter-spacing:-.01em}
+.kicker{color:var(--accent2);font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.sec-lead{color:var(--muted);max-width:720px;margin:0 0 26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font:inherit;font-weight:600}
+.tab[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#0b0d14}
+.demo{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+@media(max-width:820px){.demo{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:20px}
+.panel h3{margin:0 0 4px;font-size:1.05rem}
+.panel p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+.log{font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#090b12;border:1px solid var(--line);border-radius:10px;padding:12px;height:290px;overflow:auto;color:#b7c0dd}
+.log .t{color:#5d6788}.log .g{color:var(--ok)}.log .r{color:var(--bad)}.log .y{color:var(--warn)}.log .b{color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+label.chk{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.93rem}
+.status{display:inline-block;border-radius:8px;padding:4px 10px;font-weight:700;font-size:.9rem;background:#1a2036}
+.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}.status.wait{color:var(--warn)}
+.big{font-size:2rem;font-weight:800}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svcbox{border:1px solid var(--line);border-radius:12px;padding:14px;background:#0f1320;min-height:104px}
+.svcbox h4{margin:0 0 4px;font-size:.95rem}
+.svcbox small{color:var(--muted)}
+.svcbox.down{border-color:rgba(255,107,122,.5);background:rgba(255,107,122,.06)}
+.svcbox .x{color:var(--bad);font-size:.85rem}
+.crash{border:1px dashed var(--bad);border-radius:12px;padding:30px;text-align:center;color:var(--bad);background:rgba(255,107,122,.06)}
+.chat{background:#0f1320;border:1px solid var(--line);border-radius:12px;padding:14px;min-height:190px;white-space:pre-wrap}
+.chat .q{color:var(--accent);margin-bottom:8px}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--accent2);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+input[type=text]{flex:1;min-width:180px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0f1320;color:var(--text);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:22px}
+.card h3{margin:0 0 6px;font-size:1.1rem}
+.card p{margin:0 0 10px;color:var(--muted);font-size:.96rem}
+.chips span{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:3px 9px;margin:0 6px 6px 0;font-size:.82rem;color:var(--muted)}
+.tag{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--accent2);text-transform:uppercase}
+.timeline{border-left:2px solid var(--line);margin:0;padding:0 0 0 22px}
+.timeline li{list-style:none;position:relative;margin-bottom:24px}
+.timeline li::before{content:"";position:absolute;left:-29px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline b{display:block}
+.timeline small{color:var(--muted)}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.step{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--card)}
+.step::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#0b0d14;font-weight:800;margin-bottom:8px}
+.step h4{margin:0 0 4px}.step p{margin:0;color:var(--muted);font-size:.94rem}
+.contact{text-align:center}
+.contact .big{margin:6px 0 12px}
+footer{padding:30px 0;color:var(--muted);text-align:center;font-size:.9rem}
+svg text{fill:var(--text);font:12px system-ui}
+</style>
+<style>.topbar{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08)}.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.topbar a{color:var(--muted);text-decoration:none}.topbar b{font-size:18px}</style>
+</head><body>
+<div class="topbar"><div class="wrap"><b>CognitivED engineering patterns: live demos</b><a href="https://github.com/samir-husain/cognitived">Back to the case study on GitHub</a></div></div>
+<section id="demos"><div class="wrap">
+<div class="kicker">Live demos</div>
+<h2>Small versions of problems I solve for real</h2>
+<p class="sec-lead">Everything here runs in your browser. These are simplified models of patterns from my work on CognitivED, not the product itself.</p>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" aria-selected="true" data-tab="pay">Checkout that cannot double-charge</button>
+<button class="tab" role="tab" aria-selected="false" data-tab="fail">Graceful failure</button>
+<button class="tab" role="tab" aria-selected="false" data-tab="ai">AI answers that stream and cancel</button>
+</div>
+
+<div id="tab-pay" class="demo">
+<div class="panel">
+<h3>Pay for a course: ₹4,999</h3>
+<p>Click Pay more than once, turn on a flaky network, or open this page in a second tab and pay from both.</p>
+<div class="row"><button class="btn primary" id="payBtn">Pay ₹4,999</button><button class="btn" id="payReset">Reset demo</button></div>
+<div class="row"><label class="chk"><input type="checkbox" id="slow"> Slow network</label><label class="chk"><input type="checkbox" id="lose"> Lose the server's reply</label></div>
+<div class="row">Your screen: <span class="status wait" id="payStatus">Not paid</span></div>
+<div class="row">Times your card was actually charged: <span class="big" id="charges">0</span></div>
+<p style="margin-top:10px">How: a lock shared across tabs, one stable request key per cart so the server charges only once, and after a lost reply the page asks the order record what happened instead of guessing.</p>
+</div>
+<div class="panel"><h3>What happened</h3><div class="log" id="payLog"></div></div>
+</div>
+
+<div id="tab-fail" class="demo" hidden>
+<div class="panel">
+<h3>One service goes down</h3>
+<p>Take any service offline. Compare a naive app with one that fails one section at a time.</p>
+<div class="row"><label class="chk"><input type="radio" name="mode" value="naive"> Naive app</label><label class="chk"><input type="radio" name="mode" value="smart" checked> Resilient app</label></div>
+<div class="row" id="svcToggles"></div>
+</div>
+<div class="panel"><h3>Student screen</h3><div id="svcView"></div></div>
+</div>
+
+<div id="tab-ai" class="demo" hidden>
+<div class="panel">
+<h3>Ask the tutor</h3>
+<p>Answers appear word by word, like a real AI tutor. Stop it at any moment, or simulate the service timing out.</p>
+<div class="row"><input type="text" id="aiQ" value="How do I solve a quadratic equation?"><button class="btn primary" id="aiAsk">Ask</button><button class="btn" id="aiStop" disabled>Stop</button></div>
+<div class="row"><label class="chk"><input type="checkbox" id="aiFail"> Simulate the AI service timing out</label></div>
+<div class="chat" id="aiChat"><span style="color:var(--muted)">The answer shows here.</span></div>
+</div>
+<div class="panel"><h3>What the code does</h3><div class="log" id="aiLog"></div></div>
+</div>
+</div></section>
+<footer style="padding:30px 0;text-align:center;color:var(--muted);font-size:14px">Simplified browser models of patterns from my work on CognitivED, built by Samir Husain. Not the product itself.</footer>
+<script>
+const $=s=>document.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function logTo(box,cls,msg){const d=document.createElement("div");const t=new Date().toLocaleTimeString([], {hour12:false});d.innerHTML='<span class="t">'+t+'</span> <span class="'+cls+'">'+esc(msg)+'</span>';box.appendChild(d);box.scrollTop=box.scrollHeight}
+
+// tabs
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  ["pay","fail","ai"].forEach(n=>{$("#tab-"+n).hidden=n!==b.dataset.tab});
+}));
+
+/* ---------- Demo 1: checkout ---------- */
+const LS={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const TAB=Math.random().toString(36).slice(2,6);
+const KEY="cart-4999-demo";               // one stable request key per cart
+const LOCK="demo_lock", ORDERS="demo_orders";
+const payLog=$("#payLog");
+function pl(c,m){logTo(payLog,c,"["+TAB+"] "+m)}
+function setStatus(txt,cls){const s=$("#payStatus");s.textContent=txt;s.className="status "+cls}
+function charges(){return (LS.get(ORDERS)||{})[KEY]?1:0}
+function refreshCharges(){$("#charges").textContent=charges();if(charges()&&!inFlight)setStatus("Paid","ok")}
+// the fake "server": creates the order only if this key has not been seen
+async function serverCreateOrder(key){
+  await sleep($("#slow").checked?1800:350);
+  const o=LS.get(ORDERS)||{};
+  if(o[key]){return {order:o[key],duplicate:true}}
+  o[key]={id:"ord_"+Math.random().toString(36).slice(2,8),paidAt:Date.now()};LS.set(ORDERS,o);
+  return {order:o[key],duplicate:false}
+}
+function acquireLock(){
+  const l=LS.get(LOCK),now=Date.now();
+  if(l&&l.owner!==TAB&&l.until>now)return false;
+  LS.set(LOCK,{owner:TAB,until:now+15000});return true
+}
+let inFlight=false;
+$("#payBtn").addEventListener("click",async()=>{
+  if(inFlight){pl("y","Click ignored: a payment is already running in this tab.");return}
+  if(charges()){pl("y","Already paid. Nothing to do.");return}
+  if(!acquireLock()){pl("r","Blocked: another tab is paying right now. Wait for it.");setStatus("Paying in another tab","wait");return}
+  inFlight=true;setStatus("Paying...","wait");pl("b","Lock acquired. Sending order with key "+KEY);
+  let res=null;
+  try{
+    res=await serverCreateOrder(KEY);
+    if($("#lose").checked){throw new Error("network dropped before the reply arrived")}
+    pl("g","Server replied: order "+res.order.id+(res.duplicate?" (same order, not charged again)":" created and charged once"));
+  }catch(e){
+    pl("r","No reply: "+e.message);
+    pl("y","Not guessing. Asking the order record for this cart...");
+    setStatus("Checking your payment...","wait");
+    await sleep(900);
+    const o=(LS.get(ORDERS)||{})[KEY];
+    if(o)pl("g","Order record says: paid ("+o.id+"). Showing success.");else pl("r","Order record says: not paid. Safe to retry.");
+  }finally{
+    inFlight=false;LS.del(LOCK);refreshCharges();if(!charges())setStatus("Not paid","wait")
+  }
+});
+$("#payReset").addEventListener("click",()=>{LS.del(ORDERS);LS.del(LOCK);payLog.innerHTML="";setStatus("Not paid","wait");refreshCharges();pl("b","Demo reset.")});
+window.addEventListener("storage",()=>refreshCharges());
+refreshCharges();pl("b","Tab "+TAB+" ready. Open this page in a second tab to try two tabs paying.");
+
+/* ---------- Demo 2: graceful failure ---------- */
+const SERVICES=[["video","Video lessons","Lesson 4: Fractions is ready to play"],["pay","Payments","2 courses in your cart"],["chat","Messages","3 unread from your tutor"],["stats","Progress","68% of the course completed"]];
+const down={video:false,pay:false,chat:false,stats:false};
+function renderSvc(){
+  const naive=document.querySelector('input[name=mode]:checked').value==="naive";
+  const anyDown=Object.values(down).some(Boolean);
+  if(naive&&anyDown){$("#svcView").innerHTML='<div class="crash"><b>Something went wrong</b><br>The whole page failed to load.<br><br><small>One broken service took everything with it.</small></div>';return}
+  $("#svcView").innerHTML='<div class="svc">'+SERVICES.map(([k,t,ok])=>down[k]?
+   '<div class="svcbox down"><h4>'+t+'</h4><div class="x">'+t+' are temporarily unavailable.</div><button class="btn" data-retry="'+k+'" style="margin-top:8px;padding:6px 12px">Retry</button></div>':
+   '<div class="svcbox"><h4>'+t+'</h4><small>'+ok+'</small></div>').join("")+'</div>'+(anyDown?'<p style="margin:12px 0 0;color:var(--ok)">Everything else still works.</p>':'');
+  document.querySelectorAll("[data-retry]").forEach(b=>b.addEventListener("click",()=>{b.textContent="Retrying...";setTimeout(renderSvc,700)}))
+}
+$("#svcToggles").innerHTML=SERVICES.map(([k,t])=>'<label class="chk"><input type="checkbox" data-svc="'+k+'"> '+t+' offline</label>').join("");
+document.querySelectorAll("[data-svc]").forEach(c=>c.addEventListener("change",()=>{down[c.dataset.svc]=c.checked;renderSvc()}));
+document.querySelectorAll("input[name=mode]").forEach(r=>r.addEventListener("change",renderSvc));
+renderSvc();
+
+/* ---------- Demo 3: AI streaming ---------- */
+const ANSWER="To solve a x² + b x + c = 0, first check that a is not zero.\n\nStep 1: Work out the discriminant D = b² − 4ac.\nStep 2: If D is positive there are two real answers, if D is zero there is one, and if D is negative there are none.\nStep 3: Use the formula x = (−b ± √D) / 2a.\n\nExample: x² − 5x + 6 = 0 gives D = 25 − 24 = 1, so x = (5 ± 1) / 2, which is 3 or 2.";
+const aiLog=$("#aiLog"),aiChat=$("#aiChat");
+let aiCtl=null;
+function al(c,m){logTo(aiLog,c,m)}
+$("#aiAsk").addEventListener("click",async()=>{
+  if(aiCtl)return;
+  const ctl={stop:false};aiCtl=ctl;
+  $("#aiAsk").disabled=true;$("#aiStop").disabled=false;
+  const q=$("#aiQ").value.trim()||"Hello";
+  aiChat.innerHTML='<div class="q">You: '+esc(q)+'</div><span id="aiOut"></span><span class="cursor"></span>';
+  const out=$("#aiOut");
+  al("b","Request sent. Waiting for the first byte (heartbeat every 15 s keeps the proxy from closing the stream).");
+  await sleep(700);
+  if($("#aiFail").checked){
+    await sleep(1200);
+    aiChat.innerHTML='<div class="q">You: '+esc(q)+'</div><span style="color:var(--bad)">The tutor is taking too long to answer. Your question is saved. Please try again.</span>';
+    al("r","No first byte within the limit. Showing a clear message, not a frozen screen.");
+  }else{
+    const words=ANSWER.split(/(\s+)/);let n=0;
+    al("g","Stream open. Rendering tokens as they arrive.");
+    for(const w of words){
+      if(ctl.stop)break;
+      out.textContent+=w;n++;
+      await sleep(w.trim()?45:0);
+    }
+    if(ctl.stop){al("y","Stopped by the user after "+n+" chunks. Stream closed, nothing keeps running in the background.")}
+    else{al("g","Stream finished. "+n+" chunks received.");aiChat.querySelector(".cursor")?.remove()}
+    aiChat.querySelector(".cursor")?.remove();
+  }
+  aiCtl=null;$("#aiAsk").disabled=false;$("#aiStop").disabled=true;
+});
+$("#aiStop").addEventListener("click",()=>{if(aiCtl)aiCtl.stop=true});
+</script>
+</body></html>
