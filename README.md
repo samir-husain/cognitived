@@ -4,7 +4,7 @@
 
 **An AI-assisted e-learning platform: DRM-protected video lessons, assessments, analytics dashboards, an AI tutor that talks back, and online payments, built on a React SPA, a React admin panel and about 23 Node.js microservices.**
 
-Live product: [cognitive-edu.com](https://cognitive-edu.com) · My role: Senior Software Engineer at IINVSYS, owner of the student web app and the admin panel, with backend support across the services.
+Live product: [cognitive-edu.com](https://amd.cognitive-edu.com/) · My role: Senior Software Engineer at IINVSYS, owner of the student web app and the admin panel, with backend support across the services.
 
 > The source code is proprietary to my employer. This repository documents the architecture, the engineering decisions and the measurable results, which I can discuss in depth in an interview. The **[live demos](https://samir-husain.github.io/cognitived/demos/)** in `demos/` are small browser models of three of the patterns, written by me for this repository.
 
